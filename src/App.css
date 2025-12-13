@@ -1,0 +1,94 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+div#root {
+    width: 100%;
+}
+
+.app-container {
+    background: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    width: 95%;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4f46e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4338ca;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 15px 0;
+}
+
+#qr-reader {
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+p,
+a {
+    word-break: break-all;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+a {
+    display: inline-block;
+    background-color: #10b981;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #059669;
+}
+
+@media screen and (max-width: 480px) {
+    .app-container {
+        padding: 15px;
+    }
+    button,
+    a {
+        width: 100%;
+        text-align: center;
+    }
+    #qr-reader {
+        max-width: 100%;
+    }
+}
