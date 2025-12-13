@@ -3,7 +3,6 @@ import './App.css';
 import { useEffect, useRef,useState } from "react";
 
 const  App=()=> {
-  const videoRef = useRef(null);
   const qrRef=useRef(null);
   const [result,setResult]=useState("");
   const [isCameraOn,setIsCameraOn]=useState(false);
@@ -23,9 +22,6 @@ const  App=()=> {
         console.error("File scan error:", err);
       });
   };
-  
-
-
   useEffect(() => {
     if (!isCameraOn) return;
   
@@ -66,16 +62,14 @@ const  App=()=> {
       setStoptButton(true);
 
       }}>
-      Start Camera</button>}  
+      Tap to Scan QR code</button>}  
 
     {stopButton&&<button onClick={()=>{
       setIsCameraOn(false);
       setStartButton(true);
       setStoptButton(false);
-
       }}>
       
-
         Stop Camera</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
@@ -95,7 +89,6 @@ const  App=()=> {
         {result && (
           <p><strong>Scanned Result:</strong>{result}</p>
         )}
-      {/* { isCameraOn&& <video ref={videoRef} autoPlay playsInline />}     */}
       </div>
   );
 }
