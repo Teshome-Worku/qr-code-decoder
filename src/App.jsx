@@ -12,6 +12,8 @@ const  App=()=> {
   const[copy,setCopy]=useState(false);
   const [loading,setLoading]=useState(false);
   const [disable,setDisable]=useState(false);
+  const [frontCamera, setFrontCamera] = useState(false);
+
   const handleFileScan = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -33,7 +35,6 @@ const  App=()=> {
         },2000)
       })
   };
-  let front=true;
   useEffect(() => {
     if (!isCameraOn) return;
   
@@ -41,7 +42,7 @@ const  App=()=> {
   
     qr
       .start(
-        { facingMode:front? "environment":"user" },
+        { facingMode:frontCamera? "environment":"user" },
         { fps: 15, qrbox: 250 },
 
         (decodedText) => {
@@ -90,8 +91,11 @@ const  App=()=> {
       
       ⛔Stop Scanning</button>}
       {stopButton&&<button onClick={()=>{
-        front=!front;
-      }}>Flip Camera</button>}
+        setFrontCamera((prev) => !prev);
+        setIsCameraOn(false);
+        setTimeout(() => setIsCameraOn(true), 300);
+
+      }}>🔄 Flip Camera</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
         type="file"
