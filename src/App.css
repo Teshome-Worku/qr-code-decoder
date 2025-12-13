@@ -23,7 +23,6 @@ div#root {
     max-width: 450px;
     width: 95%;
     min-height: 300px;
-    /* margin-left: 30%; */
 }
 
 .app-container:hover {
@@ -115,5 +114,25 @@ a:hover {
     }
     #qr-reader {
         max-width: 100%;
+    }
+}
+
+.dots::after {
+    content: '';
+    animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+    0% {
+        content: '';
+    }
+    33% {
+        content: '.';
+    }
+    66% {
+        content: '..';
+    }
+    100% {
+        content: '..';
     }
 }

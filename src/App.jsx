@@ -10,10 +10,13 @@ const  App=()=> {
   const[startButton,setStartButton]=useState(true);
   const[stopButton,setStoptButton]=useState(false);
   const[copy,setCopy]=useState(false);
-
+  const [loading,setLoading]=useState(false);
+  const [disable,setDisable]=useState(false);
   const handleFileScan = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    setLoading(true);
+    setResult("");
     const html5QrCode = new Html5Qrcode("file-qr-reader");
   
     html5QrCode.scanFile(file, true)
@@ -22,8 +25,15 @@ const  App=()=> {
       })
       .catch((err) => {
         console.error("File scan error:", err);
-      });
+      })
+      .finally(()=>{
+        setTimeout(()=>{
+          setLoading(false);
+          setDisable(true);
+        },2000)
+      })
   };
+  let front=true;
   useEffect(() => {
     if (!isCameraOn) return;
   
@@ -31,17 +41,22 @@ const  App=()=> {
   
     qr
       .start(
-        { facingMode: "environment" },
+        { facingMode:front? "environment":"user" },
         { fps: 15, qrbox: 250 },
 
         (decodedText) => {
           if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
             window.location.href = decodedText;
-          } else {
-            setResult(decodedText); 
-          }
-          setIsCameraOn(false);
-          qr.stop();
+            return;
+          } 
+          setResult(decodedText); 
+          setTimeout(()=>{
+            setIsCameraOn(false);
+            qr.stop();
+
+          },2000);
+          
+          
         },
         (error) => {
           console.log("scanning...")
@@ -74,32 +89,33 @@ const  App=()=> {
       }}>
       
       ⛔Stop Scanning</button>}
+      {stopButton&&<button onClick={()=>{
+        front=!front;
+      }}>Flip Camera</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
         type="file"
         accept="image/*"
         onChange={handleFileScan}
       />
-      
-      
-        {result && (
+      {loading && <p style={{color:"#059669"}}>📡 Scanning<span className="dots">.</span></p>}
+        {disable&&result && (
           <p>🔍<strong>Scanned Result:</strong>{result}</p>
         )}
-        {result&&<button 
-        onClick={()=>{
+        {disable&&result&&<button 
+          onClick={()=>{
           navigator.clipboard.writeText(result);
           setCopy(true);
-          setTimeout(()=>{
-            setCopy(false)
-          },3000)
+          
         }
-        
+
         } title="copy to clipboard">
           {copy?"Copied":"📋Copy"} </button>}
-          {result.startsWith("http") && (
-        <a href={result} target="_blank" rel="noopener noreferrer">
+
+        {disable&&result.startsWith("http") && (
+         <a href={result} target="_blank" rel="noopener noreferrer">
            🔗Open Link
-        </a>
+         </a>
       )}
       </div>
   );
