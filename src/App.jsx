@@ -8,6 +8,7 @@ const  App=()=> {
   const [isCameraOn,setIsCameraOn]=useState(false);
   const[startButton,setStartButton]=useState(true);
   const[stopButton,setStoptButton]=useState(false);
+  const[copy,setCopy]=useState(false);
 
   const handleFileScan = (e) => {
     const file = e.target.files[0];
@@ -51,12 +52,20 @@ const  App=()=> {
       qr.stop().catch(() => {});
     };
   }, [isCameraOn]);
+  const copyToClipboard=(result)=>{
+    setCopy(true);
+    navigator.clipboard.write(result);
+    setTimeout(()=>{
+      setCopy(false)
+    },1500)
+  }
   
 
   return (
     <div className="app-container"> 
-      <h2>Camera Preview</h2>
-    {startButton&&<button onClick={()=>{
+      <h2>Qr Code Decoder App</h2>
+      <img src="../public/decode.png" alt="decoder image" />
+     {startButton&&<button onClick={()=>{
       setIsCameraOn(true);
       setStartButton(false);
       setStoptButton(true);
@@ -64,7 +73,7 @@ const  App=()=> {
       }}>
       Tap to Scan QR code</button>}  
 
-    {stopButton&&<button onClick={()=>{
+     {stopButton&&<button onClick={()=>{
       setIsCameraOn(false);
       setStartButton(true);
       setStoptButton(false);
@@ -77,18 +86,27 @@ const  App=()=> {
         accept="image/*"
         onChange={handleFileScan}
       />
-      <button onClick={()=>navigator.clipboard.writeText(result)}>Copy</button>
       <div id="file-qr-reader" style={{ display: "none" }}></div>
-      {result.startsWith("http") && (
+      
+        {result && (
+          <p><strong>Scanned Result:</strong>{result}</p>
+        )}
+        {result&&<button 
+        onClick={()=>{
+          navigator.clipboard.writeText(result);
+          setCopy(true);
+          setTimeout(()=>{
+            setCopy(false)
+          },3000)
+        }
+        
+        } title="copy to clipboard">
+          {copy?"Copied":"Copy"} </button>}
+          {result.startsWith("http") && (
       <a href={result} target="_blank" rel="noopener noreferrer">
         Open Link
       </a>
       )}
-
-
-        {result && (
-          <p><strong>Scanned Result:</strong>{result}</p>
-        )}
       </div>
   );
 }
