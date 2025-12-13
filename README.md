@@ -23,9 +23,5 @@ The app is optimized for mobile devices.
 Due to browser security restrictions, Wi-Fi QR codes are decoded and displayed but cannot automatically connect the device.
 
 ## 🌐 Live Demo
-( Add your Vercel link here )
+https://qr-code-decoder-ebon.vercel.app/
 
-## 📂 How to Run Locally
-```bash
-npm install
-npm run dev
