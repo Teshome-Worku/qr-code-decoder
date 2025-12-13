@@ -42,7 +42,7 @@ const  App=()=> {
   
     qr
       .start(
-        { facingMode:frontCamera? "environment":"user" },
+        { facingMode:frontCamera? "user":"environment" },
         { fps: 15, qrbox: 250 },
 
         (decodedText) => {
