@@ -1,4 +1,5 @@
 import { Html5Qrcode } from "html5-qrcode";
+import decodeImg from "./assets/decode.png";
 import './App.css';
 import { useEffect, useRef,useState } from "react";
 
@@ -52,19 +53,11 @@ const  App=()=> {
       qr.stop().catch(() => {});
     };
   }, [isCameraOn]);
-  const copyToClipboard=(result)=>{
-    setCopy(true);
-    navigator.clipboard.write(result);
-    setTimeout(()=>{
-      setCopy(false)
-    },1500)
-  }
   
-
   return (
     <div className="app-container"> 
       <h2>QR Code Decoder App</h2>
-      <img src="../public/decode.png" alt="decoder image" />
+      <img src={decodeImg} alt="decoder image" />
      {startButton&&<button onClick={()=>{
       setIsCameraOn(true);
       setStartButton(false);
@@ -72,6 +65,7 @@ const  App=()=> {
 
       }}>
       📷 Tap to Scan QR code</button>}  
+      <div id="file-qr-reader" style={{ display: "none" }}></div><br />
 
      {stopButton&&<button onClick={()=>{
       setIsCameraOn(false);
@@ -79,14 +73,14 @@ const  App=()=> {
       setStoptButton(false);
       }}>
       
-      ⛔Stop Camera</button>}
+      ⛔Stop Scanning</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
         type="file"
         accept="image/*"
         onChange={handleFileScan}
       />
-      <div id="file-qr-reader" style={{ display: "none" }}></div>
+      
       
         {result && (
           <p>🔍<strong>Scanned Result:</strong>{result}</p>
@@ -101,7 +95,7 @@ const  App=()=> {
         }
         
         } title="copy to clipboard">
-          {copy?"Copied":"Copy"} </button>}
+          {copy?"Copied":"📋Copy"} </button>}
           {result.startsWith("http") && (
         <a href={result} target="_blank" rel="noopener noreferrer">
            🔗Open Link
