@@ -63,7 +63,7 @@ const  App=()=> {
 
   return (
     <div className="app-container"> 
-      <h2>Qr Code Decoder App</h2>
+      <h2>QR Code Decoder App</h2>
       <img src="../public/decode.png" alt="decoder image" />
      {startButton&&<button onClick={()=>{
       setIsCameraOn(true);
@@ -71,7 +71,7 @@ const  App=()=> {
       setStoptButton(true);
 
       }}>
-      Tap to Scan QR code</button>}  
+      📷 Tap to Scan QR code</button>}  
 
      {stopButton&&<button onClick={()=>{
       setIsCameraOn(false);
@@ -79,7 +79,7 @@ const  App=()=> {
       setStoptButton(false);
       }}>
       
-        Stop Camera</button>}
+      ⛔Stop Camera</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
         type="file"
@@ -89,7 +89,7 @@ const  App=()=> {
       <div id="file-qr-reader" style={{ display: "none" }}></div>
       
         {result && (
-          <p><strong>Scanned Result:</strong>{result}</p>
+          <p>🔍<strong>Scanned Result:</strong>{result}</p>
         )}
         {result&&<button 
         onClick={()=>{
@@ -104,7 +104,7 @@ const  App=()=> {
           {copy?"Copied":"Copy"} </button>}
           {result.startsWith("http") && (
         <a href={result} target="_blank" rel="noopener noreferrer">
-           Open Link
+           🔗Open Link
         </a>
       )}
       </div>
