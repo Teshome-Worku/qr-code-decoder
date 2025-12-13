@@ -1,18 +1,27 @@
-# React + Vite
+# 📷 QR Code Decoder App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mobile-friendly QR Code Decoder built with React that allows users to scan QR codes using their device camera or by uploading images.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- Scan QR codes using camera
+- Upload image to decode QR
+- Automatically redirect for URL QR codes
+- Decode Wi-Fi QR codes (SSID, password, security)
+- Copy scanned result to clipboard
+- Mobile responsive UI
+- Works smoothly on modern browsers
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Built With
+- React
+- html5-qrcode
+- Vite
+- JavaScript (ES6)
+- CSS
 
-## React Compiler
+## 📱 Mobile Support
+The app is optimized for mobile devices.  
+Due to browser security restrictions, Wi-Fi QR codes are decoded and displayed but cannot automatically connect the device.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🌐 Live Demo
+https://qr-code-decoder-ebon.vercel.app/
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
