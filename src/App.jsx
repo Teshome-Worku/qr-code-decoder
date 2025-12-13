@@ -103,9 +103,9 @@ const  App=()=> {
         } title="copy to clipboard">
           {copy?"Copied":"Copy"} </button>}
           {result.startsWith("http") && (
-      <a href={result} target="_blank" rel="noopener noreferrer">
-        Open Link
-      </a>
+        <a href={result} target="_blank" rel="noopener noreferrer">
+           Open Link
+        </a>
       )}
       </div>
   );

@@ -107,6 +107,7 @@ a:hover {
     a {
         width: 100%;
         text-align: center;
+        max-width: fit-content;
     }
     #qr-reader {
         max-width: 100%;
