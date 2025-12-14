@@ -1,5 +1,5 @@
 import { Html5Qrcode } from "html5-qrcode";
-import decodeImg from "./assets/decode.png";
+import decodeImg from "./assets/decoder.png";
 import './App.css';
 import { useEffect, useRef,useState } from "react";
 
