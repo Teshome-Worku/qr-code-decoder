@@ -5,6 +5,7 @@ import { useEffect, useRef,useState } from "react";
 
 const  App=()=> {
   const qrRef=useRef(null);
+  const fileInputRef=useRef(null);
   const [result,setResult]=useState("");
   const [isCameraOn,setIsCameraOn]=useState(false);
   const[startButton,setStartButton]=useState(true);
@@ -19,7 +20,8 @@ const  App=()=> {
   const handleFileScan = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-      setResult("");
+  
+    setResult("");
     setUnknown("");
     setVisibleUnknown(false);
     setDisable(false);
@@ -41,22 +43,19 @@ const  App=()=> {
           setLoading(false);
           setUnknown("Please upload a valid QR code!");
           setVisibleUnknown(true);
-            setTimeout(() => {
+  
+          if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+          }
+  
+          setTimeout(() => {
             setVisibleUnknown(false);
             setUnknown("");
           }, 3000);
         }, 2000);
-      })
-  
-      .finally(()=>{
-        setTimeout(()=>{
-          setLoading(false);
-          setDisable(true);
-        },2000)
-        
-      })
-
+      });
   };
+  
   useEffect(() => {
     if (!isCameraOn) return;
   
@@ -121,6 +120,7 @@ const  App=()=> {
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
         <input
         type="file"
+        ref={fileInputRef}
         accept="image/*"
         onChange={handleFileScan}
       />
