@@ -93,7 +93,7 @@ const  App=()=> {
       {stopButton&&<button onClick={()=>{
         setFrontCamera((prev) => !prev);
         setIsCameraOn(false);
-        setTimeout(() => setIsCameraOn(true), 300);
+        setTimeout(() => setIsCameraOn(true), 100);
 
       }}>🔄 Flip Camera</button>}
         {isCameraOn&& <div id="qr-reader" ref={qrRef}></div>}
