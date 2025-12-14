@@ -44,7 +44,7 @@ const  App=()=> {
             setTimeout(() => {
             setVisibleUnknown(false);
             setUnknown("");
-          }, 2000);
+          }, 3000);
         }, 2000);
       })
   
