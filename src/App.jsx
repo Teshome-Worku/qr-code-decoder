@@ -13,27 +13,49 @@ const  App=()=> {
   const [loading,setLoading]=useState(false);
   const [disable,setDisable]=useState(false);
   const [frontCamera, setFrontCamera] = useState(false);
+  const[unknown,setUnknown]=useState("");
+  const[visibleUnknown,setVisibleUnknown]=useState(false);
 
   const handleFileScan = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+      setResult("");
+    setUnknown("");
+    setVisibleUnknown(false);
+    setDisable(false);
     setLoading(true);
-    setResult("");
+  
     const html5QrCode = new Html5Qrcode("file-qr-reader");
   
-    html5QrCode.scanFile(file, true)
+    html5QrCode
+      .scanFile(file, true)
       .then((text) => {
-        setResult(text);
+        setTimeout(() => {
+          setLoading(false);
+          setResult(text);
+          setDisable(true);
+        }, 2000);
       })
-      .catch((err) => {
-        console.error("File scan error:", err);
+      .catch(() => {
+        setTimeout(() => {
+          setLoading(false);
+          setUnknown("Please upload a valid QR code!");
+          setVisibleUnknown(true);
+            setTimeout(() => {
+            setVisibleUnknown(false);
+            setUnknown("");
+          }, 2000);
+        }, 2000);
       })
+  
       .finally(()=>{
         setTimeout(()=>{
           setLoading(false);
           setDisable(true);
         },2000)
+        
       })
+
   };
   useEffect(() => {
     if (!isCameraOn) return;
@@ -103,6 +125,7 @@ const  App=()=> {
         onChange={handleFileScan}
       />
       {loading && <p style={{color:"#059669"}}>📡 Scanning<span className="dots">.</span></p>}
+      {visibleUnknown&&<p style={{color:"red"}}>{unknown}</p>}
         {disable&&result && (
           <p>🔍<strong>Scanned Result:</strong>{result}</p>
         )}
